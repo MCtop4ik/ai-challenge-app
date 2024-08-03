@@ -1,7 +1,6 @@
 import React, { useState, createRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
-import s from "../styles/Crop.module.css"
 export default function Home() {
   const defaultSrc = "../public/output.png";
   const [image, setImage] = useState(defaultSrc);
