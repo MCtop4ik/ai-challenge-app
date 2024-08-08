@@ -1,6 +1,8 @@
 import React, { useState, createRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+
+
 export default function Home() {
   const defaultSrc = "../public/output.png";
   const [image, setImage] = useState(defaultSrc);
@@ -23,7 +25,7 @@ export default function Home() {
   };
 
   const getCropData = () => {
-    if (typeof cropperRef.current?.cropper !== "undefined") {
+    if (cropperRef.current?.cropper.cropped !== false) { // исправил ошибку при необнаружении фото
       setCropData(cropperRef.current.cropper.getCroppedCanvas().toDataURL());
     }
   };
@@ -60,7 +62,7 @@ export default function Home() {
               Crop Image
             </button>
           </h1>
-          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
+          <img style={{ width: "100%" }} src={cropData} alt="cropper" />
         </div>
       </div>
       <br style={{ clear: "both" }} />

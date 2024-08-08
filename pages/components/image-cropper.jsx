@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
-import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
+import Cropper from 'cropperjs';
 
-const ImageCropper = ({ onCrop }) => {
+
+
+export default function ImageCropper ({ onCrop }) {
   const [imageSrc, setImageSrc] = useState(null);
   const imageElement = useRef(null);
   const cropper = useRef(null);
@@ -52,5 +54,3 @@ const ImageCropper = ({ onCrop }) => {
     </div>
   );
 };
-
-export default ImageCropper;

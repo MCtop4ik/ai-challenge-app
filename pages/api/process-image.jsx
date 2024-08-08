@@ -2,6 +2,7 @@ import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs';
 
+
 export default async function handler(req, res) {
     const inputImagePath = path.join(process.cwd(), 'public', 'input.png');
     const outputImagePath = path.join(process.cwd(), 'public', 'output.png');
