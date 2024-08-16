@@ -1,0 +1,11 @@
+.buttonsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttonsContainer__button {
+    background-color: black;
+    width: 200px;
+    height: 200px;
+}
