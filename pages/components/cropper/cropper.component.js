@@ -1,6 +1,7 @@
 import React, { useState, createRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
+import styles from './cropper.module.css';
 
 export default function RealCropper() {
   const defaultSrc = "../public/output.png";
@@ -53,7 +54,7 @@ export default function RealCropper() {
       <div>
         
         <div
-          className="box"
+          className={styles.box}
           style={{ width: "50%", float: "right", height: "300px" }}
         >
           <h1>
