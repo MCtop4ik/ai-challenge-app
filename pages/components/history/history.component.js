@@ -5,11 +5,9 @@ export default function History() {
     return (
     <div class="historyContainer">
         <h1 class="historyContainer__title">History</h1>
-        {items.map((item, index) => (
-        <div key={index} className="item">
-          <HistoryCard id={item}></HistoryCard>
-        </div>
-      ))}
+        {items.map((item) => (
+            <HistoryCard id={item}></HistoryCard>
+        ))}
     </div>
     )
 }
