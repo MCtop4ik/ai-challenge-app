@@ -20,7 +20,7 @@ export default function HistoryCard({ id }) {
                 <img className={styles.historyCard__photo_container_photo} src="./input.png"></img>
             </div>
                 <Modal show={showModal} onClose={toggleModal}>
-                    <CardInfoModal />
+                    <CardInfoModal id={id} />
                 </Modal>
         </div>
     )
