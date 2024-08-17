@@ -1,9 +1,11 @@
 .header {
     height: 100px;
-    background-color: rgb(0, 117, 176);
+    /* background-color: rgb(0, 117, 176); */
 }
 
 .header__logo {
+    padding-left: 5%;
+
     height: 80%;
     width: auto;
 }

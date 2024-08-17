@@ -1,6 +1,7 @@
 .historyCard {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 20px;
     border-radius: 15px;
 
@@ -8,8 +9,8 @@
 }
 
 .historyCard__information {
-    margin: 10px;
-    padding: 10px;
+    /* margin: 10px; */
+    padding: 10px 20px;
 }
 
 .historyCard__information_date {
@@ -23,15 +24,12 @@
 }
 
 .historyCard__photo_container {
-    border-radius: 15px;
-    margin: 10px;
-    padding: 10px;
-
-    height: 100px;
-    width: 100px;
+    /* margin: 10px; */
+    padding: 10px 20px;
 }
 
 .historyCard__photo_container_photo {
-    height: 100px;
-    width: 100px;
+    border-radius: 15px;
+    height: 80px;
+    width: 80px;
 }
