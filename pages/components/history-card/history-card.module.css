@@ -1,12 +1,37 @@
 .historyCard {
-    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
     border-radius: 15px;
 
     background-color: rgb(0, 117, 176);
 }
 
-.historyCard__title {
+.historyCard__information {
     margin: 10px;
+    padding: 10px;
+}
+
+.historyCard__information_date {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
+}
+
+.historyCard__information_amount {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+
+.historyCard__photo_container {
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+
+    height: 100px;
+    width: 100px;
+}
+
+.historyCard__photo_container_photo {
+    height: 100px;
+    width: 100px;
 }
