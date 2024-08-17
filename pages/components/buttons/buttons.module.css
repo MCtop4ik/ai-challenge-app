@@ -2,10 +2,28 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: rgb(0, 117, 176);
 }
 
 .buttonsContainer__button {
-    background-color: black;
-    width: 200px;
-    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+
+    background-color: white;
+}
+
+.buttonsContainer__button_icon {
+    width: 100px;
+    height: auto;
+}
+
+.buttonsContainer__button_description {
+    background-color: aliceblue;
 }

@@ -1,5 +1,7 @@
+import styles from './separator.module.css';
+
 export default function Separator() {
     return (
-        <div><hr></hr></div>
+        <div className={styles.separator}><hr></hr></div>
     )
 }
