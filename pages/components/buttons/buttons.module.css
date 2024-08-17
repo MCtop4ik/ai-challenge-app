@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* background-color: rgb(0, 117, 176); */
+    flex-wrap: wrap;
 }
 
 .buttonsContainer__button {
