@@ -1,0 +1,23 @@
+.buttonsContainer__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+
+    background-color: white;
+}
+
+.buttonsContainer__button_icon {
+    width: 100px;
+    height: auto;
+}
+
+.buttonsContainer__button_description {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
