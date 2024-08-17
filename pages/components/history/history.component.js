@@ -1,13 +1,11 @@
-import HistoryCard from "../history-card/history-card.component"
+import HistoryCards from "../history-cards/history-cards.component"
+import styles from './history.module.css';
 
 export default function History() {
-    const items = ['1', '2', '3'];
     return (
-    <div class="historyContainer">
-        <h1 class="historyContainer__title">History</h1>
-        {items.map((item) => (
-            <HistoryCard id={item}></HistoryCard>
-        ))}
+    <div className={styles.historyContainer}>
+        <h1 className={styles.historyContainer__title}>History</h1>
+        <HistoryCards></HistoryCards>
     </div>
     )
 }
