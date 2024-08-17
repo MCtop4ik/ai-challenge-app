@@ -5,7 +5,7 @@
     margin: 20px;
     border-radius: 15px;
 
-    background-color: rgb(0, 117, 176);
+    background-color: rgb(1, 47, 108);
 }
 
 .historyCard__information {
@@ -16,11 +16,13 @@
 .historyCard__information_date {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
+    color: white;
 }
 
 .historyCard__information_amount {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
+    color: white;
 }
 
 .historyCard__photo_container {
