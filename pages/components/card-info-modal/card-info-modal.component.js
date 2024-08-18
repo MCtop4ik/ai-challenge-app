@@ -1,4 +1,4 @@
-export default function CardInfoModal({id}) {
+export default function CardInfoModal({ historyCard }) {
     return (
         <div>
             <h2>Modal Title {id}</h2>
