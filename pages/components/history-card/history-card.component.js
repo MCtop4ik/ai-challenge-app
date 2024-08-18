@@ -8,7 +8,7 @@ export default function HistoryCard({ id }) {
     const [showModal, setShowModal] = useState(false);
 
     const toggleModal = () => {
-        HistoryApi.addHistoryCard([{'id': 1, 'imagePath': 'test.png', 'pipeCount': 1, 'createdDate': new Date()}]);
+        HistoryApi.addHistoryCard({'id': 1, 'imagePath': 'test.png', 'pipeCount': 1, 'createdDate': new Date()});
         setShowModal(!showModal);
     };
 
