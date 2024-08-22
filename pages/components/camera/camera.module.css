@@ -1,0 +1,77 @@
+#root {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 10%;
+    min-height: 10%;
+    transform: translate(-50%, -50%);
+    background-color: #000;
+}
+
+.mirror {
+    transform: translate(-50%, -50%) scale(-1, 1);
+}
+
+.canvas {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.h1 {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 0 4px #000;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    font-size: 20px;
+    color: red;
+}
+
+.controls {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 42px;
+}
+
+.button {
+    margin-bottom: 10px;
+    border: 0;
+    padding: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #ea0009;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 4px #000;
+}
