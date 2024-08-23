@@ -20,13 +20,11 @@ export default function HistoryCards() {
       {items.map((historyCard, index) => (
         <HistoryCard key={index} historyCard={historyCard}></HistoryCard>
       ))}
-      {
-        items.length === 0 && (
+      {items.length === 0 && (
           <div className={styles.historyCardsContainer__title}>
             No images
           </div>
-        )
-      }
+        )}
     </div>
   )
 }

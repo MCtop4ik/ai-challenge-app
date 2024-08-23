@@ -12,7 +12,25 @@
     width: 80%;
 }
 
+.camera__cameraPhoto {
+    border-radius: 20px;
+    max-width: 400px;
+    max-height: 400px;
+    width: 80%;
+}
+
 .camera__buttonContainer {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+    max-height: 400px;
+    width: 80%;
+}
+
+.camera__buttonContainer_photo {
+    justify-content: center;
     padding: 20px;
 }
 

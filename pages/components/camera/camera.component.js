@@ -35,19 +35,22 @@ export default function Camera() {
     return (
         <div className={styles.camera}>
             {imgSrc ? (
-                <img src={imgSrc} alt="webcam" />
+                <img className={styles.camera__cameraPhoto} src={imgSrc} alt="webcam" />
             ) : (
                 <Webcam className={styles.camera__webcam} ref={webcamRef} />
             )}
-            <div className={styles.camera__buttonContainer}>
-                {imgSrc ? (
+            {imgSrc ? (
+                <div className={styles.camera__buttonContainer}>
                     <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Retake photo</button>
-                ) : (
+                    <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Next</button>
+                </div>
+            ) : (
+                <div className={styles.camera__buttonContainer_photo}>
                     <button className={styles.camera__buttonContainer_beautifulButton} onClick={capture}>
                         Make Photo
                     </button>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     );
 };
