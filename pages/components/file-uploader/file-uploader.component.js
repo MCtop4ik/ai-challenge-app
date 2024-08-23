@@ -1,16 +1,37 @@
 import styles from "./file-uploader.module.css";
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import Modal from '../modal/modal.component';
+import FileUploaderModal from "../file-uploader-modal/file-uploader-modal.component";
 
 export default function FileUploader() {
     const fileInputRef = useRef(null);
+    const [showModal, setShowModal] = useState(false);
+    const [fileContent, setFileContent] = useState('');
 
     const handleClick = () => {
-      fileInputRef.current.click();
+        fileInputRef.current.click();
     };
-  
+
     const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      console.log('Selected file:', file);
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const base64String = e.target.result;
+                setFileContent(base64String);
+                console.log('Base64 String:', base64String);
+            };
+
+            reader.readAsDataURL(file);
+            fileInputRef.current.value = '';
+        }
+        console.log('Selected file:', file);
+        toggleModal();
+    };
+
+    function toggleModal() {
+        setShowModal(!showModal);
     };
 
     return (
@@ -25,6 +46,9 @@ export default function FileUploader() {
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
             />
+            <Modal show={showModal} onClose={toggleModal}>
+                <FileUploaderModal fileContent={fileContent} />
+            </Modal>
         </>
     )
 }

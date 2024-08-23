@@ -1,50 +1,38 @@
-.camera {
+.fileUploaderModalContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.camera__webcam {
+.fileUploaderModalContainer__image {
     border-radius: 20px;
     max-width: 400px;
     max-height: 400px;
     width: 80%;
 }
 
-.camera__cameraPhoto {
-    border-radius: 20px;
-    max-width: 400px;
-    max-height: 400px;
-    width: 80%;
-}
-
-.camera__title {
+.fileUploaderModalContainer__title {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 32px;
     font-weight: bold;
     color: black;
     padding: 5px 20px;
     align-self: flex-start;
-    margin: 24px;
+    justify-content: flex-start;
+    margin: 10px 5%;
 }
 
-.camera__buttonContainer {
+.fileUploaderModalContainer__buttonContainer {
     padding: 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     max-width: 400px;
     max-height: 400px;
     width: 80%;
 }
 
-.camera__buttonContainer_photo {
-    justify-content: center;
-    padding: 20px;
-}
-
-.camera__buttonContainer_beautifulButton {
+.fileUploaderModalContainer__buttonContainer_beautifulButton {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     border: none;
     border-radius: 8px;
@@ -56,13 +44,13 @@
     transition: all 0.3s ease;
 }
 
-.camera__buttonContainer_beautifulButton:hover {
+.fileUploaderModalContainer__buttonContainer_beautifulButton:hover {
     background: linear-gradient(135deg, #a777e3, #6e8efb);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
 }
 
-.camera__buttonContainer_beautifulButton:active {
+.fileUploaderModalContainer__buttonContainer_beautifulButton:active {
     background: linear-gradient(135deg, #6e8efb, #a777e3);
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     transform: translateY(1px);

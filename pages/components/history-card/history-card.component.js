@@ -2,7 +2,6 @@ import styles from './history-card.module.css';
 import React, { useState, useEffect } from 'react';
 import Modal from '../modal/modal.component';
 import CardInfoModal from '../card-info-modal/card-info-modal.component';
-import HistoryApi from '../../api/history.api';
 import IDBApi from '../../api/idb.api';
 
 export default function HistoryCard({ historyCard }) {
@@ -14,7 +13,7 @@ export default function HistoryCard({ historyCard }) {
         
         const fetchImage = async () => {
             try {
-                const image = await IDBApi.getImage(historyCard.imagePath);
+                const image = await IDBApi.getImage(historyCard.imageID);
                 if (isMounted) {
                     setImageSrc(image);
                 }
@@ -27,10 +26,9 @@ export default function HistoryCard({ historyCard }) {
         return () => {
             isMounted = false;
         };
-    }, [historyCard.imagePath]);
+    }, [historyCard.imageID]);
 
     function toggleModal() {
-        HistoryApi.addHistoryCard({ 'id': 1, 'imagePath': 'myImage', 'pipeCount': 1, 'createdDate': new Date() });
         setShowModal(!showModal);
     };
 

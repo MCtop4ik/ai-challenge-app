@@ -7,10 +7,10 @@ export default function CardInfoModal({ historyCard }) {
 
     useEffect(() => {
         let isMounted = true;
-        
+
         const fetchImage = async () => {
             try {
-                const image = await IDBApi.getImage(historyCard.imagePath);
+                const image = await IDBApi.getImage(historyCard.imageID);
                 if (isMounted) {
                     setImageSrc(image);
                 }
@@ -23,7 +23,7 @@ export default function CardInfoModal({ historyCard }) {
         return () => {
             isMounted = false;
         };
-    }, [historyCard.imagePath]);
+    }, [historyCard.imageID]);
 
     return (
         <div className={styles.cardInfoModalContainer}>
