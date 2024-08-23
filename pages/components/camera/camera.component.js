@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import styles from "./camera.module.css";
 import IDBApi from '../../api/idb.api';
+import HistoryApi from '../../api/history.api';
 
 export default function Camera() {
     const webcamRef = useRef(null);
@@ -9,15 +10,27 @@ export default function Camera() {
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
+        const imageID = generateRandomString(8);
         setImgSrc(imageSrc);
-        IDBApi.saveImage(imageSrc).then(() => {
-            alert('Saved in idb');
+        IDBApi.saveImage(imageSrc, imageID).then(() => {
+            HistoryApi.addHistoryCard({ 'id': 1, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
         });
     }, [webcamRef]);
 
     const retake = () => {
         setImgSrc(null);
     };
+
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charactersLength);
+            result += characters[randomIndex];
+        }
+        return result;
+    }
 
     return (
         <div className={styles.camera}>
