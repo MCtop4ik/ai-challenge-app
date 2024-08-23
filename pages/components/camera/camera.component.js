@@ -1,6 +1,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import styles from "./camera.module.css";
+import IDBApi from '../../api/idb.api';
 
 export default function Camera() {
     const webcamRef = useRef(null);
@@ -9,7 +10,7 @@ export default function Camera() {
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImgSrc(imageSrc);
-        IndexedDBService.saveImage(imageSrc).then(() => {
+        IDBApi.saveImage(imageSrc).then(() => {
             alert('Saved in idb');
         });
     }, [webcamRef]);
