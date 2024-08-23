@@ -1,5 +1,35 @@
 .fileUploaderModalContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
+.fileUploaderModalContainer__image {
+    border-radius: 20px;
+    max-width: 400px;
+    max-height: 400px;
+    width: 80%;
+}
+
+.fileUploaderModalContainer__title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 20px;
+    align-self: flex-start;
+    justify-content: flex-start;
+    margin: 10px 5%;
+}
+
+.fileUploaderModalContainer__buttonContainer {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    max-width: 400px;
+    max-height: 400px;
+    width: 80%;
 }
 
 .fileUploaderModalContainer__buttonContainer_beautifulButton {

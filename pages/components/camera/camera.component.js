@@ -35,6 +35,13 @@ export default function Camera() {
     return (
         <div className={styles.camera}>
             {imgSrc ? (
+                <div className={styles.camera__title}>
+                    Image Preview
+                </div>
+            )   :   (
+                <div></div>
+            )}
+            {imgSrc ? (
                 <img className={styles.camera__cameraPhoto} src={imgSrc} alt="webcam" />
             ) : (
                 <Webcam className={styles.camera__webcam} ref={webcamRef} />

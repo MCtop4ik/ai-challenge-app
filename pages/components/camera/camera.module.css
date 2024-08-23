@@ -19,6 +19,16 @@
     width: 80%;
 }
 
+.camera__title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    padding: 5px 20px;
+    align-self: flex-start;
+    margin: 24px;
+}
+
 .camera__buttonContainer {
     padding: 20px;
     display: flex;
