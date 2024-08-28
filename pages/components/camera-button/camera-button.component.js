@@ -3,7 +3,7 @@ import styles from "./camera-button.module.css";
 import { useState } from "react"
 import Modal from '../modal/modal.component';
 import ModalControllerApi from '../../api/modal-controller.api';
-
+import FileInfoModal from "../file-info-modal/file-info-modal.component";
 
 export default function CameraButton() {
     const [showCameraModal, setShowCameraModal] = useState(false);
@@ -42,7 +42,7 @@ export default function CameraButton() {
                 <Camera onInformationModalOpen={openInformationModal} />
             </Modal>
             <Modal show={showInformationModal} onClose={toggleModal}>
-                <h2>Next</h2>
+                <FileInfoModal />
             </Modal>
         </>
     )

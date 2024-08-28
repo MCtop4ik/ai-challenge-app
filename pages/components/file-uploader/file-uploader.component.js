@@ -2,11 +2,13 @@ import styles from "./file-uploader.module.css";
 import React, { useRef, useState } from 'react';
 import Modal from '../modal/modal.component';
 import FileUploaderModal from "../file-uploader-modal/file-uploader-modal.component";
+import FileInfoModal from "../file-info-modal/file-info-modal.component";
+import ModalControllerApi from '../../api/modal-controller.api';
 
 export default function FileUploader() {
     const fileInputRef = useRef(null);
-    const [showModal, setShowModal] = useState(false);
-    const [showInfoModal, setShowInfoModal] = useState(false);
+    const [showUploadModal, setShowUploadModal] = useState(false);
+    const [showInformationModal, setShowInformationModal] = useState(false);
     const [fileContent, setFileContent] = useState('');
 
     const handleClick = () => {
@@ -28,12 +30,25 @@ export default function FileUploader() {
             fileInputRef.current.value = '';
         }
         console.log('Selected file:', file);
-        toggleModal();
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.openUploadModal();
+        setShowUploadModal(modalControllerApi.getUploadModal());
+        setShowInformationModal(modalControllerApi.getInformationModal());
     };
 
     function toggleModal() {
-        setShowModal(!showModal);
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.closeAllModals();
+        setShowUploadModal(modalControllerApi.getUploadModal());
+        setShowInformationModal(modalControllerApi.getInformationModal());
     };
+
+    const openInformationModal = () => {
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.openInformationModal();
+        setShowUploadModal(modalControllerApi.getUploadModal());
+        setShowInformationModal(modalControllerApi.getInformationModal());
+    }
 
     return (
         <>
@@ -47,8 +62,11 @@ export default function FileUploader() {
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
             />
-            <Modal show={showModal} onClose={toggleModal}>
-                <FileUploaderModal fileContent={fileContent} />
+            <Modal show={showUploadModal} onClose={toggleModal}>
+                <FileUploaderModal fileContent={fileContent} onInformationModalOpen={openInformationModal} />
+            </Modal>
+            <Modal show={showInformationModal} onClose={toggleModal}>
+                <FileInfoModal />
             </Modal>
         </>
     )
