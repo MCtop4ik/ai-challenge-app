@@ -6,6 +6,7 @@ import FileUploaderModal from "../file-uploader-modal/file-uploader-modal.compon
 export default function FileUploader() {
     const fileInputRef = useRef(null);
     const [showModal, setShowModal] = useState(false);
+    const [showInfoModal, setShowInfoModal] = useState(false);
     const [fileContent, setFileContent] = useState('');
 
     const handleClick = () => {

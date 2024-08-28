@@ -3,8 +3,9 @@ import Webcam from "react-webcam";
 import styles from "./camera.module.css";
 import IDBApi from '../../api/idb.api';
 import HistoryApi from '../../api/history.api';
+import ModalControllerApi from '../../api/modal-controller.api';
 
-export default function Camera() {
+export default function Camera({ onInformationModalOpen }) {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
 
@@ -20,6 +21,12 @@ export default function Camera() {
     const retake = () => {
         setImgSrc(null);
     };
+
+    const goNext = () => {
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.openInformationModal();
+        onInformationModalOpen(true);
+    }
 
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -49,7 +56,7 @@ export default function Camera() {
             {imgSrc ? (
                 <div className={styles.camera__buttonContainer}>
                     <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Retake photo</button>
-                    <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Next</button>
+                    <button className={styles.camera__buttonContainer_beautifulButton} onClick={goNext}>Next</button>
                 </div>
             ) : (
                 <div className={styles.camera__buttonContainer_photo}>

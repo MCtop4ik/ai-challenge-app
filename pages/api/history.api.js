@@ -1,4 +1,3 @@
-import { handleClientScriptLoad } from "next/script";
 import StorageApi from "./storage.api";
 
 export default class HistoryApi {
