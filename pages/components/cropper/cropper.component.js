@@ -49,7 +49,9 @@ export default function RealCropper({ imageSrc }) {
           <div className={styles.cropperContainer}>
             <h1 className={styles.cropperContainer__title}>Analyzed image</h1>
             <h2 className={styles.cropperContainer__countPipes}>Pipes Count: unknown</h2>
-            {cropData && <img className={styles.cropperContainer__croppedImage} src={cropData} alt="cropped" />}
+            <div className={styles.cropperContainer__wrapper}>
+              {cropData && <img className={styles.cropperContainer__croppedImage} src={cropData} alt="cropped" />}
+            </div>
           </div>
         </Modal>
       </div>

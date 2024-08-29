@@ -2,7 +2,7 @@ import styles from './card-info-modal.module.css';
 import React, { useState, useEffect } from 'react';
 import IDBApi from '../../api/idb.api';
 
-export default function CardInfoModal({ historyCard }) {
+export default function CardInfoModal({ historyCard, onInformationButtonClick }) {
     const [imageSrc, setImageSrc] = useState(null);
 
     useEffect(() => {
@@ -24,6 +24,10 @@ export default function CardInfoModal({ historyCard }) {
             isMounted = false;
         };
     }, [historyCard.imageID]);
+    
+    function openInformationModal() {
+        onInformationButtonClick(true)
+    }
 
     return (
         <div className={styles.cardInfoModalContainer}>
@@ -43,7 +47,7 @@ export default function CardInfoModal({ historyCard }) {
                         })
                     }</strong>
                 </p>
-                <button>Open</button>
+                <button className={styles.cardInfoModalContainer__cropButton} onClick={openInformationModal}>Open</button>
             </div>
         </div>
     )
