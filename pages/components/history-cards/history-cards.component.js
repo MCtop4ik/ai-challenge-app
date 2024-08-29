@@ -8,7 +8,8 @@ export default function HistoryCards() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await HistoryApi.getHistoryCards();
+      let data = await HistoryApi.getHistoryCards();
+      data = data.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
       setItems(data);
     };
   
