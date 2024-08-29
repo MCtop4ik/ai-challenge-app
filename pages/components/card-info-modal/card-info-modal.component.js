@@ -43,6 +43,7 @@ export default function CardInfoModal({ historyCard }) {
                         })
                     }</strong>
                 </p>
+                <button>Open</button>
             </div>
         </div>
     )

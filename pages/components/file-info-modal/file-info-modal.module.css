@@ -1,8 +1,22 @@
 .image {
-    max-width: 100%;  /* Устанавливает максимальную ширину изображения в 100% от контейнера */
-    height: auto;     /* Высота автоматически пропорциональна ширине */
-    border: 1px solid #ccc; /* Для добавления границы вокруг изображения */
-    border-radius: 8px; /* Округление углов изображения */
-    display: block;   /* Убирает возможные пробелы вокруг изображения */
-    margin: 0 auto;   /* Центрирование изображения по горизонтали */
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    align-self: flex-start;
+    justify-content: flex-start;
+}
+
+.information {
+    color: #666666;
+    font-size: 14px;
 }
