@@ -78,9 +78,7 @@
   height: auto;
   border-radius: 8px;
   border: 2px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   object-fit: cover;
-  margin-top: 5px;
 }
 
 .cropperContainer__title {

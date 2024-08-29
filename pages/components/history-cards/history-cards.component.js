@@ -13,15 +13,6 @@ export default function HistoryCards() {
     };
   
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await HistoryApi.getHistoryCards();
-      setItems(data);
-    };
-  
-    fetchData();
 
     const intervalId = setInterval(fetchData, 1000);
     return () => clearInterval(intervalId);
