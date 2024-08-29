@@ -57,22 +57,33 @@ export default function FileUploader() {
         setShowInformationModal(modalControllerApi.getInformationModal());
     };
 
-    const openInformationModal = () => {
-        const modalControllerApi = new ModalControllerApi();
-
-        const imageID = generateRandomString(8);
-        const imageSrc = fileContent;
-        const fileID = generateRandomString(10);
-        IDBApi.saveImage(imageSrc, imageID).then(() => {
-            HistoryApi.addHistoryCard({ 'id': fileID, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
-        });
-        setFileID(fileID);
-        modalControllerApi.setFileID(fileID);
-        modalControllerApi.openInformationModal();
-        setShowUploadModal(modalControllerApi.getUploadModal());
-        setShowInformationModal(modalControllerApi.getInformationModal());
+    const openInformationModal = async () => {
+        try {
+            const modalControllerApi = new ModalControllerApi();
+    
+            const imageID = generateRandomString(8);
+            const imageSrc = fileContent;
+            const fileID = generateRandomString(10);
+    
+            await IDBApi.saveImage(imageSrc, imageID);
+    
+            HistoryApi.addHistoryCard({
+                'id': fileID,
+                'imageID': imageID,
+                'pipeCount': 1,
+                'createdDate': new Date()
+            });
+    
+            setFileID(fileID);
+            modalControllerApi.setFileID(fileID);
+            modalControllerApi.openInformationModal();
+            
+            setShowUploadModal(modalControllerApi.getUploadModal());
+            setShowInformationModal(modalControllerApi.getInformationModal());
+        } catch (error) {
+            console.error('Error opening information modal:', error);
+        }
     }
-
     return (
         <>
             <div className={styles.buttonContainer} onClick={handleClick}>

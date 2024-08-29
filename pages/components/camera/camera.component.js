@@ -18,18 +18,29 @@ export default function Camera({ onInformationModalOpen }) {
         setImgSrc(null);
     };
 
-    const goNext = () => {
-        const modalControllerApi = new ModalControllerApi();
-        const imageID = generateRandomString(8);
-        const fileID = generateRandomString(10)
-        IDBApi.saveImage(imgSrc, imageID).then(() => {
-            HistoryApi.addHistoryCard({ 'id': fileID, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
-        });        
-        modalControllerApi.setFileID(fileID);
-        modalControllerApi.openInformationModal();
-        onInformationModalOpen(true);
+    const goNext = async () => {
+        try {
+            const modalControllerApi = new ModalControllerApi();
+            const imageID = generateRandomString(8);
+            const fileID = generateRandomString(10);
+    
+            await IDBApi.saveImage(imgSrc, imageID);
+    
+            HistoryApi.addHistoryCard({ 
+                'id': fileID, 
+                'imageID': imageID, 
+                'pipeCount': 1, 
+                'createdDate': new Date() 
+            });
+    
+            modalControllerApi.setFileID(fileID);
+            modalControllerApi.openInformationModal();
+            onInformationModalOpen(true);
+        } catch (error) {
+            console.error('Error in goNext:', error);
+        }
     }
-
+    
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         let result = '';
