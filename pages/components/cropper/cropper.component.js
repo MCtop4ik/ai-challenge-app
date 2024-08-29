@@ -23,10 +23,10 @@ export default function RealCropper({ imageSrc }) {
 
   return (
     <div className={styles.cropperContainer}>
-      <div className={styles.cropperWrapper}>
+      <div className={styles.cropperContainer__cropperWrapper}>
         <Cropper
           ref={cropperRef}
-          className={styles.cropper}
+          className={styles.cropperContainer__cropper}
           zoomTo={0.5}
           initialAspectRatio={1}
           preview=".img-preview"
@@ -41,12 +41,18 @@ export default function RealCropper({ imageSrc }) {
           guides={true}
         />
       </div>
-      <div className={styles.resultWrapper}>
-        <button className={styles.cropButton} onClick={getCropData}>
-          Crop Image
+      <div className={styles.cropperContainer__resultWrapper}>
+        <button className={styles.cropperContainer__cropButton} onClick={getCropData}>
+          Analyze
         </button>
         <Modal show={showCroppedModal} onClose={toggleCroppedModal}>
-          {cropData && <img className={styles.croppedImage} src={cropData} alt="cropped" />}
+          <div className={styles.cropperContainer}>
+            <h1 className={styles.cropperContainer__title}>Analyzed image</h1>
+            <h2 className={styles.cropperContainer__countPipes}>Pipes Count: unknown</h2>
+            <div className={styles.cropperContainer__wrapper}>
+              {cropData && <img className={styles.cropperContainer__croppedImage} src={cropData} alt="cropped" />}
+            </div>
+          </div>
         </Modal>
       </div>
     </div>
