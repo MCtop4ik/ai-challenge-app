@@ -3,24 +3,44 @@ import Webcam from "react-webcam";
 import styles from "./camera.module.css";
 import IDBApi from '../../api/idb.api';
 import HistoryApi from '../../api/history.api';
+import ModalControllerApi from '../../api/modal-controller.api';
 
-export default function Camera() {
+export default function Camera({ onInformationModalOpen }) {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        const imageID = generateRandomString(8);
         setImgSrc(imageSrc);
-        IDBApi.saveImage(imageSrc, imageID).then(() => {
-            HistoryApi.addHistoryCard({ 'id': 1, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
-        });
     }, [webcamRef]);
 
     const retake = () => {
         setImgSrc(null);
     };
 
+    const goNext = async () => {
+        try {
+            const modalControllerApi = new ModalControllerApi();
+            const imageID = generateRandomString(8);
+            const fileID = generateRandomString(10);
+    
+            await IDBApi.saveImage(imgSrc, imageID);
+    
+            HistoryApi.addHistoryCard({ 
+                'id': fileID, 
+                'imageID': imageID, 
+                'pipeCount': 1, 
+                'createdDate': new Date() 
+            });
+    
+            modalControllerApi.setFileID(fileID);
+            modalControllerApi.openInformationModal();
+            onInformationModalOpen(true);
+        } catch (error) {
+            console.error('Error in goNext:', error);
+        }
+    }
+    
     function generateRandomString(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         let result = '';
@@ -49,7 +69,7 @@ export default function Camera() {
             {imgSrc ? (
                 <div className={styles.camera__buttonContainer}>
                     <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Retake photo</button>
-                    <button className={styles.camera__buttonContainer_beautifulButton} onClick={retake}>Next</button>
+                    <button className={styles.camera__buttonContainer_beautifulButton} onClick={goNext}>Next</button>
                 </div>
             ) : (
                 <div className={styles.camera__buttonContainer_photo}>

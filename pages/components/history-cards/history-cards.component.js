@@ -2,6 +2,7 @@ import styles from './history-cards.module.css';
 import HistoryCard from "../history-card/history-card.component"
 import HistoryApi from '../../api/history.api';
 import React, { useEffect, useState } from 'react';
+import ModalContollerApi from '../../api/modal-controller.api';
 
 export default function HistoryCards() {
   const [items, setItems] = useState([]);

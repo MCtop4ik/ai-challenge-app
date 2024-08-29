@@ -1,71 +1,54 @@
-import React, { useState, createRef } from "react";
+import React, { useState, useRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import styles from './cropper.module.css';
+import Modal from "../modal/modal.component";
 
-export default function RealCropper() {
-  const defaultSrc = "../public/output.png";
-  const [image, setImage] = useState(defaultSrc);
+export default function RealCropper({ imageSrc }) {
   const [cropData, setCropData] = useState("#");
-  const cropperRef = createRef(); // Исправлено здесь
-
-  const onChange = (e) => {
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(files[0]);
-  };
+  const [showCroppedModal, setShowCroppedModal] = useState(false);
+  const cropperRef = useRef(null);
 
   const getCropData = () => {
-    if (typeof cropperRef.current?.cropper !== "undefined") {
-      setCropData(cropperRef.current.cropper.getCroppedCanvas().toDataURL());
+    if (cropperRef.current && cropperRef.current.cropper) {
+      const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas();
+      setCropData(croppedCanvas.toDataURL());
+      toggleCroppedModal();
     }
   };
 
+  const toggleCroppedModal = () => {
+    setShowCroppedModal(!showCroppedModal);
+  }
+
   return (
-    <div>
-      <div style={{ width: "100%" }}>
-        <input type="file" onChange={onChange} />
+    <div className={styles.cropperContainer}>
+      <div className={styles.cropperWrapper}>
         <Cropper
           ref={cropperRef}
-          style={{ height: 400, width: "100%" }}
+          className={styles.cropper}
           zoomTo={0.5}
           initialAspectRatio={1}
           preview=".img-preview"
-          src={image}
+          src={imageSrc}
           viewMode={1}
           minCropBoxHeight={10}
           minCropBoxWidth={10}
           background={false}
           responsive={true}
           autoCropArea={1}
-          checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+          checkOrientation={false}
           guides={true}
         />
       </div>
-      <div>
-        
-        <div
-          className={styles.box}
-          style={{ width: "50%", float: "right", height: "300px" }}
-        >
-          <h1>
-            <button style={{ float: "right" }} onClick={getCropData}>
-              Crop Image
-            </button>
-          </h1>
-          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
-        </div>
+      <div className={styles.resultWrapper}>
+        <button className={styles.cropButton} onClick={getCropData}>
+          Crop Image
+        </button>
+        <Modal show={showCroppedModal} onClose={toggleCroppedModal}>
+          {cropData && <img className={styles.croppedImage} src={cropData} alt="cropped" />}
+        </Modal>
       </div>
-      <br style={{ clear: "both" }} />
     </div>
   );
 }

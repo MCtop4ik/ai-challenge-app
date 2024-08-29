@@ -2,11 +2,17 @@ import styles from "./file-uploader.module.css";
 import React, { useRef, useState } from 'react';
 import Modal from '../modal/modal.component';
 import FileUploaderModal from "../file-uploader-modal/file-uploader-modal.component";
+import FileInfoModal from "../file-info-modal/file-info-modal.component";
+import ModalControllerApi from '../../api/modal-controller.api';
+import IDBApi from '../../api/idb.api';
+import HistoryApi from '../../api/history.api';
 
 export default function FileUploader() {
     const fileInputRef = useRef(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showUploadModal, setShowUploadModal] = useState(false);
+    const [showInformationModal, setShowInformationModal] = useState(false);
     const [fileContent, setFileContent] = useState('');
+    const [fileID, setFileID] = useState('');
 
     const handleClick = () => {
         fileInputRef.current.click();
@@ -20,20 +26,64 @@ export default function FileUploader() {
             reader.onload = (e) => {
                 const base64String = e.target.result;
                 setFileContent(base64String);
-                console.log('Base64 String:', base64String);
+
             };
 
             reader.readAsDataURL(file);
             fileInputRef.current.value = '';
         }
         console.log('Selected file:', file);
-        toggleModal();
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.openUploadModal();
+        setShowUploadModal(modalControllerApi.getUploadModal());
+        setShowInformationModal(modalControllerApi.getInformationModal());
     };
+
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charactersLength);
+            result += characters[randomIndex];
+        }
+        return result;
+    }
 
     function toggleModal() {
-        setShowModal(!showModal);
+        const modalControllerApi = new ModalControllerApi();
+        modalControllerApi.closeAllModals();
+        setShowUploadModal(modalControllerApi.getUploadModal());
+        setShowInformationModal(modalControllerApi.getInformationModal());
     };
 
+    const openInformationModal = async () => {
+        try {
+            const modalControllerApi = new ModalControllerApi();
+    
+            const imageID = generateRandomString(8);
+            const imageSrc = fileContent;
+            const fileID = generateRandomString(10);
+    
+            await IDBApi.saveImage(imageSrc, imageID);
+    
+            HistoryApi.addHistoryCard({
+                'id': fileID,
+                'imageID': imageID,
+                'pipeCount': 1,
+                'createdDate': new Date()
+            });
+    
+            setFileID(fileID);
+            modalControllerApi.setFileID(fileID);
+            modalControllerApi.openInformationModal();
+            
+            setShowUploadModal(modalControllerApi.getUploadModal());
+            setShowInformationModal(modalControllerApi.getInformationModal());
+        } catch (error) {
+            console.error('Error opening information modal:', error);
+        }
+    }
     return (
         <>
             <div className={styles.buttonContainer} onClick={handleClick}>
@@ -46,8 +96,11 @@ export default function FileUploader() {
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
             />
-            <Modal show={showModal} onClose={toggleModal}>
-                <FileUploaderModal fileContent={fileContent} />
+            <Modal show={showUploadModal} onClose={toggleModal}>
+                <FileUploaderModal fileContent={fileContent} onInformationModalOpen={openInformationModal} />
+            </Modal>
+            <Modal show={showInformationModal} onClose={toggleModal}>
+                <FileInfoModal id={fileID} />
             </Modal>
         </>
     )
