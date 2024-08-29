@@ -8,6 +8,7 @@ export default class ModalControllerApi {
         this.photo_modal = false;
         this.information_modal = false;
         this.upload_modal = false;
+        this.file_id = ''
 
         ModalControllerApi.instance = this;
         return this;
@@ -48,4 +49,13 @@ export default class ModalControllerApi {
         this.upload_modal = false;
         this.information_modal = false;
     }
+
+    setFileID(file_id) {
+        this.file_id = file_id
+    }
+
+    getFileID() {
+        return this.file_id
+    }
+
 }

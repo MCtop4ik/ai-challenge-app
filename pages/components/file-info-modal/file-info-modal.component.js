@@ -1,5 +1,8 @@
-export default function FileInfoModal() {
+export default function FileInfoModal({ id }) {
     return (
-        <h2>Next</h2>
+        <div>
+            <h2>Next</h2>
+            <h3>{id}</h3>
+        </div>
     )
 }

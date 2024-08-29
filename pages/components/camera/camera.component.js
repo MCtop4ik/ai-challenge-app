@@ -11,11 +11,7 @@ export default function Camera({ onInformationModalOpen }) {
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
-        const imageID = generateRandomString(8);
         setImgSrc(imageSrc);
-        IDBApi.saveImage(imageSrc, imageID).then(() => {
-            HistoryApi.addHistoryCard({ 'id': 1, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
-        });
     }, [webcamRef]);
 
     const retake = () => {
@@ -24,6 +20,12 @@ export default function Camera({ onInformationModalOpen }) {
 
     const goNext = () => {
         const modalControllerApi = new ModalControllerApi();
+        const imageID = generateRandomString(8);
+        const fileID = generateRandomString(10)
+        IDBApi.saveImage(imgSrc, imageID).then(() => {
+            HistoryApi.addHistoryCard({ 'id': fileID, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
+        });        
+        modalControllerApi.setFileID(fileID);
         modalControllerApi.openInformationModal();
         onInformationModalOpen(true);
     }

@@ -8,8 +8,7 @@ import FileInfoModal from "../file-info-modal/file-info-modal.component";
 export default function CameraButton() {
     const [showCameraModal, setShowCameraModal] = useState(false);
     const [showInformationModal, setShowInformationModal] = useState(false);
-
-    const modalControllerApi = new ModalControllerApi();
+    const [fileID, setFileID] = useState('');
 
     const toggleModal = () => {
         const modalControllerApi = new ModalControllerApi();
@@ -29,6 +28,8 @@ export default function CameraButton() {
         const modalControllerApi = new ModalControllerApi();
         modalControllerApi.openInformationModal();
         setShowCameraModal(modalControllerApi.getCameraModal());
+        setFileID(modalControllerApi.getFileID());
+        console.log('ewwe', modalControllerApi.getFileID())
         setShowInformationModal(modalControllerApi.getInformationModal());
     }
 
@@ -42,7 +43,7 @@ export default function CameraButton() {
                 <Camera onInformationModalOpen={openInformationModal} />
             </Modal>
             <Modal show={showInformationModal} onClose={toggleModal}>
-                <FileInfoModal />
+                <FileInfoModal id={fileID} />
             </Modal>
         </>
     )

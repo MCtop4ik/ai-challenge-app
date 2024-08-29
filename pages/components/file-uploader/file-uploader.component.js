@@ -4,12 +4,15 @@ import Modal from '../modal/modal.component';
 import FileUploaderModal from "../file-uploader-modal/file-uploader-modal.component";
 import FileInfoModal from "../file-info-modal/file-info-modal.component";
 import ModalControllerApi from '../../api/modal-controller.api';
+import IDBApi from '../../api/idb.api';
+import HistoryApi from '../../api/history.api';
 
 export default function FileUploader() {
     const fileInputRef = useRef(null);
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [showInformationModal, setShowInformationModal] = useState(false);
     const [fileContent, setFileContent] = useState('');
+    const [fileID, setFileID] = useState('');
 
     const handleClick = () => {
         fileInputRef.current.click();
@@ -23,7 +26,7 @@ export default function FileUploader() {
             reader.onload = (e) => {
                 const base64String = e.target.result;
                 setFileContent(base64String);
-                console.log('Base64 String:', base64String);
+
             };
 
             reader.readAsDataURL(file);
@@ -36,6 +39,17 @@ export default function FileUploader() {
         setShowInformationModal(modalControllerApi.getInformationModal());
     };
 
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charactersLength);
+            result += characters[randomIndex];
+        }
+        return result;
+    }
+
     function toggleModal() {
         const modalControllerApi = new ModalControllerApi();
         modalControllerApi.closeAllModals();
@@ -45,6 +59,15 @@ export default function FileUploader() {
 
     const openInformationModal = () => {
         const modalControllerApi = new ModalControllerApi();
+
+        const imageID = generateRandomString(8);
+        const imageSrc = fileContent;
+        const fileID = generateRandomString(10);
+        IDBApi.saveImage(imageSrc, imageID).then(() => {
+            HistoryApi.addHistoryCard({ 'id': fileID, 'imageID': imageID, 'pipeCount': 1, 'createdDate': new Date() });
+        });
+        setFileID(fileID);
+        modalControllerApi.setFileID(fileID);
         modalControllerApi.openInformationModal();
         setShowUploadModal(modalControllerApi.getUploadModal());
         setShowInformationModal(modalControllerApi.getInformationModal());
@@ -66,7 +89,7 @@ export default function FileUploader() {
                 <FileUploaderModal fileContent={fileContent} onInformationModalOpen={openInformationModal} />
             </Modal>
             <Modal show={showInformationModal} onClose={toggleModal}>
-                <FileInfoModal />
+                <FileInfoModal id={fileID} />
             </Modal>
         </>
     )
