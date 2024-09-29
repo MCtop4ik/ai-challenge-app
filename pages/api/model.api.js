@@ -4,7 +4,7 @@ const { createCanvas, loadImage } = require('canvas');
 
 export const config = {
     api: {
-        bodyParser: true,  // Default is true
+        bodyParser: true,
     },
 };
 
@@ -102,7 +102,7 @@ class Model {
     async analyze(detectImage) {
         let res = await this.detect_objects_on_image(detectImage);
         console.log(res)
-        console.log(res.length)
+        const amount = res.length;
         const img = await loadImage(detectImage);
         const canvas = createCanvas(img.width, img.height);
         const ctx = canvas.getContext('2d');
@@ -119,7 +119,7 @@ class Model {
         }
 
         const outputBuffer = canvas.toBuffer('image/png');
-        return outputBuffer;
+        return [outputBuffer, amount];
     }
 }
 
@@ -130,9 +130,9 @@ export default async function handler(req, res) {
         const base64Data = detectImage.split(',')[1];
         const buf = Buffer.from(base64Data, 'base64');
         let model = new Model();
-        const output = await model.analyze(buf);
+        const [output, amount] = await model.analyze(buf);
 
-        res.status(200).json({ message: output });
+        res.status(200).json({ message: output, amount: amount });
     } else {
         // Handle other methods (e.g., GET, PUT) by sending a "Method Not Allowed" response
         res.status(405).json({ message: 'Method Not Allowed' });
