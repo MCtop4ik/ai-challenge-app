@@ -1,8 +1,8 @@
 {
-    "id": "any_id",
-    "name": "Next.js PWA - Tutorial",
-    "short_name": "Next PWA",
-    "description": "This next.js app is a PWA.",
+    "id": "23t236326",
+    "name": "Pipe Counter",
+    "short_name": "Pipes",
+    "description": "PWA for Severstal.",
     "icons": [
       {
         "src": "./icons/android-launchericon-72-72.png",
