@@ -11,6 +11,7 @@ RUN git clone https://github.com/MCtop4ik/ai-challenge-app.git .
 RUN ls -la
 RUN git lfs ls-files
 RUN git lfs pull
+RUN cat ./public/best.onnx
 
 COPY package.json ./
 
