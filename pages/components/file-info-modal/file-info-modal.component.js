@@ -42,7 +42,7 @@ export default function FileInfoModal({ id }) {
     return (
         <div>
             <h1 className={styles.title}>Analyze Image</h1>
-            <h3 className={styles.information}>When you click on “Analyze”, the cropped image will be automatically sent to a model for analysis. In the next modal, you will be able to view the analyzed image.</h3>
+            <h3 className={styles.information}>When you click on “Analyze”, the cropped image will be automatically sent to a model for analysis. In the next modal, you will be able to view the analyzed image. Modal is experimental, so think about outputs.</h3>
             <h3 className={styles.information}>Image ID is {id}</h3>
             {imageSrc && <RealCropper imageSrc={imageSrc} />}
         </div>
