@@ -18,6 +18,7 @@ export default function RealCropper({ imageSrc }) {
     }
   };
 
+
   const detect = async (cropData) => {
     const response = await fetch('/api/model.api', {
       method: 'POST',
