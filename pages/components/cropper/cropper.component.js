@@ -5,21 +5,20 @@ import styles from './cropper.module.css';
 import Modal from "../modal/modal.component";
 
 export default function RealCropper({ imageSrc }) {
-  const [cropData, setCropData] = useState("#");
   const [modelData, setModelData] = useState("#");
+  const [amount, setAmount] = useState("#");
   const [showCroppedModal, setShowCroppedModal] = useState(false);
   const cropperRef = useRef(null);
 
   const getCropData = async () => {
     if (cropperRef.current && cropperRef.current.cropper) {
       const croppedCanvas = cropperRef.current.cropper.getCroppedCanvas();
-      setCropData(croppedCanvas.toDataURL());
-      await detect();
+      await detect(croppedCanvas.toDataURL());
       toggleCroppedModal();
     }
   };
 
-  const detect = async () => {
+  const detect = async (cropData) => {
     const response = await fetch('/api/model.api', {
       method: 'POST',
       headers: {
@@ -30,10 +29,12 @@ export default function RealCropper({ imageSrc }) {
 
     if (response.ok) {
       const data = await response.json();
+      const amount = data.amount;
       const buf = Buffer.from(data.message);
       const base64Image = buf.toString('base64');
       const imageSrc = `data:image/png;base64,${base64Image}`;
       setModelData(imageSrc);
+      setAmount(amount)
     } else {
       console.error('Error:', response.status, response.statusText);
     }
@@ -70,7 +71,7 @@ export default function RealCropper({ imageSrc }) {
         <Modal show={showCroppedModal} onClose={toggleCroppedModal}>
           <div className={styles.cropperContainer}>
             <h1 className={styles.cropperContainer__title}>Analyzed image</h1>
-            <h2 className={styles.cropperContainer__countPipes}>Pipes Count: unknown</h2>
+            <h2 className={styles.cropperContainer__countPipes}>Pipes Count: {amount}</h2>
             <div className={styles.cropperContainer__wrapper}>
               {modelData && <img className={styles.cropperContainer__croppedImage} src={modelData} alt="cropped" />}
             </div>
