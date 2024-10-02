@@ -1,5 +1,10 @@
 FROM node:latest
 
+RUN apt-get update && \
+    apt-get install -y git git-lfs && \
+    git lfs install && \
+    apt-get clean
+
 WORKDIR /app
 
 COPY package.json ./
