@@ -12,6 +12,7 @@ RUN ls -la
 RUN git lfs ls-files
 RUN git lfs pull
 RUN cat ./public/best.onnx
+COPY ./public/best.onnx ./public
 
 COPY package.json ./
 
