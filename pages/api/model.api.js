@@ -40,7 +40,7 @@ export class Model {
     }
 
     async run_model(input) {
-        const model = await ort.InferenceSession.create("./public/best.onnx");
+        const model = await ort.InferenceSession.create("./best.onnx");
         input = new ort.Tensor(Float32Array.from(input), [1, 3, 640, 640]);
         const outputs = await model.run({ images: input });
         return outputs["output0"].data;
