@@ -119,7 +119,7 @@ class Model {
         }
 
         const outputBuffer = canvas.toBuffer('image/png');
-        return [outputBuffer, amount];
+        return outputBuffer, res.length;
     }
 }
 
@@ -130,11 +130,10 @@ export default async function handler(req, res) {
         const base64Data = detectImage.split(',')[1];
         const buf = Buffer.from(base64Data, 'base64');
         let model = new Model();
-        const [output, amount] = await model.analyze(buf);
+        const output = await model.analyze(buf);
 
         res.status(200).json({ message: output, amount: amount });
     } else {
-        // Handle other methods (e.g., GET, PUT) by sending a "Method Not Allowed" response
         res.status(405).json({ message: 'Method Not Allowed' });
     }
 }
