@@ -8,6 +8,8 @@ RUN apt-get update && \
 WORKDIR /app
 
 RUN git clone https://github.com/MCtop4ik/ai-challenge-app.git . 
+RUN ls -la
+RUN git lfs ls-files
 RUN git lfs pull
 
 COPY package.json ./
