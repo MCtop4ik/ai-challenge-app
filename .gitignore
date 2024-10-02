@@ -28,4 +28,11 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-/public/best.onnx
+# /public/best.onnx
+
+# local env files
+.env
+
+# Auto Generated PWA files
+**/public/sw.js
+**/public/workbox-*.js

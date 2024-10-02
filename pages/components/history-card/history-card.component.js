@@ -6,7 +6,6 @@ import ModalControllerApi from '../../api/modal-controller.api';
 import FileInfoModal from '../file-info-modal/file-info-modal.component';
 
 export default function HistoryCard({ historyCard }) {
-    const [showModal, setShowModal] = useState(false);
     const [imageSrc, setImageSrc] = useState(null);
 
     const [showInformationModal, setShowInformationModal] = useState(false);
@@ -29,7 +28,7 @@ export default function HistoryCard({ historyCard }) {
         return () => {
             isMounted = false;
         };
-    }, [historyCard.imageID]);
+    }, [historyCard?.imageID]);
 
     const openInformationModal = () => {
         console.log('wewe hst')
@@ -49,7 +48,7 @@ export default function HistoryCard({ historyCard }) {
         <div className={styles.historyCard}>
             <div className={styles.historyCard__information} onClick={openInformationModal}>
                 <h2 className={styles.historyCard__information_date}>
-                    {(new Date(historyCard.createdDate)).toLocaleDateString('en-US', 
+                    {(new Date(historyCard?.createdDate)).toLocaleDateString('en-US', 
                     {
                         year: 'numeric',
                         month: 'long',
@@ -63,7 +62,7 @@ export default function HistoryCard({ historyCard }) {
                 <img className={styles.historyCard__photo_container_photo} src={imageSrc}></img>
             </div>
             <Modal show={showInformationModal} onClose={toggleModal}>
-                <FileInfoModal id={historyCard.id}></FileInfoModal>
+                <FileInfoModal id={historyCard?.id}></FileInfoModal>
             </Modal>
         </div>
     )

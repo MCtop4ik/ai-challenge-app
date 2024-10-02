@@ -1,26 +1,26 @@
 {
-    "id": "any_id",
-    "name": "Next.js PWA - Tutorial",
-    "short_name": "Next PWA",
-    "description": "This next.js app is a PWA.",
+    "id": "23t236326",
+    "name": "Pipe Counter",
+    "short_name": "Pipes",
+    "description": "PWA for Severstal.",
     "icons": [
       {
-        "src": "./logo72x72.png",
+        "src": "./icons/android-launchericon-72-72.png",
         "sizes": "72x72",
         "type": "image/png"
       },
       {
-        "src": "./logo192x192.png",
+        "src": "./icons/android-launchericon-144-144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "./icons/android-launchericon-192-192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "./logo384x384.png",
-        "sizes": "384x384",
-        "type": "image/png"
-      },
-      {
-        "src": "./logo512x512.png",
+        "src": "./icons/android-launchericon-512-512.png",
         "sizes": "512x512",
         "type": "image/png"
       }
