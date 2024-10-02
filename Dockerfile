@@ -7,6 +7,8 @@ RUN apt-get update && \
 
 WORKDIR /app
 
+RUN git lfs pull
+
 COPY package.json ./
 
 RUN npm install
