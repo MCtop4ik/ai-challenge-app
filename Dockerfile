@@ -14,7 +14,6 @@ RUN git config -l
 RUN git lfs ls-files
 RUN git lfs pull
 
-RUN cat ./app/public/best.onnx
 COPY package.json ./
 
 RUN npm install
