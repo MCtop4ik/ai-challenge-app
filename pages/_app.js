@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
 function App({ Component, pageProps }) {
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      }).catch((error) => {
-        console.log('Service Worker registration failed:', error);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if ('serviceWorker' in navigator) {
+  //     navigator.serviceWorker.register('/sw.js').then((registration) => {
+  //       console.log('Service Worker registered with scope:', registration.scope);
+  //     }).catch((error) => {
+  //       console.log('Service Worker registration failed:', error);
+  //     });
+  //   }
+  // }, []);
 
   return <Component {...pageProps} />;
 }
